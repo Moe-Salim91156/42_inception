@@ -1,32 +1,20 @@
-# ⚠️  IMPORTANT: Replace 'yourlogin' with your actual 42 login in the volumes section below
 
 services:
-
-  # ──────────────────────────────────────────────
-  # NGINX — the ONLY entrypoint to the infrastructure
-  # ⚠️  Only port 443 is exposed (TLSv1.2/1.3 only)
-  # ⚠️  Port 80 must NOT be exposed
-  # ──────────────────────────────────────────────
-  nginx:
+ nginx:
     build: ./requirements/nginx
     image: nginx
     container_name: nginx
-    restart: always          # ⚠️  Required: containers must restart on crash
+    restart: always
     ports:
-      - "443:443"            # ⚠️  443 only — no port 80!
+      - "443:443"
     volumes:
-      - wordpress_files:/var/www/wordpress   # Needs WP files to serve static assets
+      - wordpress_files:/var/www/wordpress
     networks:
       - inception
     depends_on:
       - wordpress
 
-  # ──────────────────────────────────────────────
-  # WORDPRESS + PHP-FPM
-  # ⚠️  No nginx inside this container
-  # ⚠️  php-fpm listens on TCP port 9000 (not a Unix socket, different container!)
-  # ──────────────────────────────────────────────
-  wordpress:
+ wordpress:
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress
@@ -41,12 +29,6 @@ services:
     secrets:
       - db_password
       - credentials
-
-  # ──────────────────────────────────────────────
-  # MARIADB
-  # ⚠️  No nginx inside this container
-  # ⚠️  Port 3306 is NOT exposed to host — only accessible inside Docker network
-  # ──────────────────────────────────────────────
   mariadb:
     build: ./requirements/mariadb
     image: mariadb
@@ -60,44 +42,23 @@ services:
     secrets:
       - db_password
       - db_root_password
-
-# ──────────────────────────────────────────────
-# NETWORK
-# ⚠️  network: host is FORBIDDEN
-# ⚠️  --link and links: are FORBIDDEN
-# ⚠️  The network section MUST be present
-# ──────────────────────────────────────────────
 networks:
   inception:
     driver: bridge
-
-# ──────────────────────────────────────────────
-# VOLUMES
-# ⚠️  Must be Docker named volumes (bind mounts alone are NOT allowed)
-# ⚠️  Data must be stored in /home/yourlogin/data on the host
-# ⚠️  Replace 'yourlogin' below with your actual 42 login!
-# ──────────────────────────────────────────────
 volumes:
   db_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/msalim/data/db      # ⚠️  Change 'yourlogin'!
+      device: /home/msalim/data/db
 
   wordpress_files:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/msalim/data/wordpress  # ⚠️  Change 'yourlogin'!
-
-# ──────────────────────────────────────────────
-# SECRETS
-# ⚠️  Paths are relative to this docker-compose.yml file
-#     compose is in srcs/, secrets are in secrets/ → path is ../secrets/
-# ⚠️  Never store passwords in Dockerfiles or .env
-# ──────────────────────────────────────────────
+      device: /home/msalim/data/wordpress 
 secrets:
   db_password:
     file: ../secrets/db_password.txt
