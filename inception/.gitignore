@@ -1,0 +1,16 @@
+# ⚠️  CRITICAL: These files must NEVER be committed to git
+#     Any credentials found in your git repository = automatic project failure
+
+# Secrets directory — contains all passwords
+secrets/
+
+# Environment file — contains domain name and usernames
+#srcs/.env
+# FOR NOW TO GET IT INTO THE OFFICIAL REPO 
+
+
+# WordPress data and database — generated at runtime
+/home/*/data/
+
+# Docker generated files
+**/.dockerignore
