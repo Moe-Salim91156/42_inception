@@ -14,7 +14,6 @@ until nc -z mariadb 3306 2>/dev/null; do
     sleep 2
 done
 echo ">>> MariaDB ready!"
-# Install only if wp-config.php doesn't exist yet
 if [ ! -f "${WP_PATH}/wp-config.php" ]; then
     echo ">>> Installing WordPress..."
 
