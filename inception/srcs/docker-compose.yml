@@ -1,18 +1,19 @@
 services:
- nginx:
+  nginx:
     build: ./requirements/nginx
     image: nginx
     container_name: nginx
-    restart: always
+    restart: always       
     ports:
-      - "443:443"
+      - "443:443" 
     volumes:
       - wordpress_files:/var/www/wordpress
     networks:
       - inception
     depends_on:
       - wordpress
- wordpress:
+
+  wordpress:
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress
@@ -27,6 +28,7 @@ services:
     secrets:
       - db_password
       - credentials
+
   mariadb:
     build: ./requirements/mariadb
     image: mariadb
@@ -40,9 +42,11 @@ services:
     secrets:
       - db_password
       - db_root_password
+
 networks:
   inception:
     driver: bridge
+
 volumes:
   db_data:
     driver: local
@@ -56,7 +60,8 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/msalim/data/wordpress 
+      device: /home/msalim/data/wordpress
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
