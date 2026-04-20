@@ -15,5 +15,4 @@ COPY conf/nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 443
 
-# ⚠️  'daemon off' keeps nginx in foreground as PID 1
 CMD ["nginx", "-g", "daemon off;"]
