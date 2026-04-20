@@ -14,7 +14,7 @@
 
 ### 1. Clone and enter the repo
 ```bash
-git clone <your-repo-url> inception
+git clone git@github.com:Moe-Salim91156/42_inception.git inception
 cd inception
 ```
 

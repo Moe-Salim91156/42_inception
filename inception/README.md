@@ -37,11 +37,11 @@ Bind mounts directly link a host path to a container path — simple but fragile
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url> inception
+git clone git@github.com:Moe-Salim91156/42_inception.git inception
 cd inception
 ```
 
-2. Replace `yourlogin` with your actual 42 login in:
+2. Replace `yourlogin` with your actual 42 login in , example my login is : `msalim`:
    - `srcs/docker-compose.yml` (volumes section)
    - `srcs/requirements/nginx/Dockerfile` (CN field in openssl command)
    - `srcs/requirements/nginx/conf/nginx.conf` (server_name)
