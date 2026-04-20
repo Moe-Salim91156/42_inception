@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-services:
-  nginx:
-    build: ./requirements/nginx
-    image: nginx
-    container_name: nginx
-    restart: always       
-    ports:
-      - "443:443" 
-=======
-
 services:
  nginx:
     build: ./requirements/nginx
@@ -17,19 +6,13 @@ services:
     restart: always
     ports:
       - "443:443"
->>>>>>> 47e00d56939ac324bc871063b0bb0dbf6a0f22f3
     volumes:
       - wordpress_files:/var/www/wordpress
     networks:
       - inception
     depends_on:
       - wordpress
-
-<<<<<<< HEAD
-  wordpress:
-=======
  wordpress:
->>>>>>> 47e00d56939ac324bc871063b0bb0dbf6a0f22f3
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress
@@ -44,10 +27,6 @@ services:
     secrets:
       - db_password
       - credentials
-<<<<<<< HEAD
-
-=======
->>>>>>> 47e00d56939ac324bc871063b0bb0dbf6a0f22f3
   mariadb:
     build: ./requirements/mariadb
     image: mariadb
@@ -61,17 +40,9 @@ services:
     secrets:
       - db_password
       - db_root_password
-<<<<<<< HEAD
-
 networks:
   inception:
     driver: bridge
-
-=======
-networks:
-  inception:
-    driver: bridge
->>>>>>> 47e00d56939ac324bc871063b0bb0dbf6a0f22f3
 volumes:
   db_data:
     driver: local
@@ -85,12 +56,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-<<<<<<< HEAD
-      device: /home/msalim/data/wordpress
-
-=======
       device: /home/msalim/data/wordpress 
->>>>>>> 47e00d56939ac324bc871063b0bb0dbf6a0f22f3
 secrets:
   db_password:
     file: ../secrets/db_password.txt
